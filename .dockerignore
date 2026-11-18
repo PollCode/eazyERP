@@ -1,0 +1,36 @@
+# Git
+.git
+.gitignore
+
+# Entornos locales (NUNCA en la imagen)
+**/.env
+**/.env.*
+!**/.env.example
+**/.venv
+**/venv
+**/__pycache__
+**/*.pyc
+**/.pytest_cache
+**/.mypy_cache
+**/.ruff_cache
+
+# Node / frontend (no aplica al backend)
+node_modules
+apps/web
+packages
+
+# IDE / OS
+.vscode
+.idea
+.DS_Store
+
+# Artefactos de build
+dist
+build
+*.egg-info
+.turbo
+
+# Docker / CI
+**/Dockerfile
+**/.dockerignore
+.github
