@@ -1,5 +1,5 @@
 from sqlmodel import create_engine, Session
-from src.core.config import settings
+from core.config import settings
 
 engine = create_engine(
     settings.DATABASE_URL,
@@ -8,7 +8,10 @@ engine = create_engine(
     max_overflow=10,
     pool_recycle=300,
     # Clave para pgbouncer en transaction mode:
-    connect_args={"prepare_threshold": None} if "psycopg" in settings.DATABASE_URL else {},
+    connect_args=(
+        {"prepare_threshold": None} if "+psycopg://" in settings.DATABASE_URL else {},
+        {"prepare_threshold": None} if "pgbouncer=true" in settings.DATABASE_URL else {}
+    ),
 )
 
 def get_db():
