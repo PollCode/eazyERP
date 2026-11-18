@@ -23,3 +23,19 @@ class TenantStatus(str, Enum):
     active = "active"
     suspended = "suspended"
     cancelled = "cancelled"
+    
+    
+class UserRole(str, Enum):
+    owner = "owner"
+    admin = "admin"
+    manager = "manager"
+    cashier = "cashier"
+    inventory = "inventory"
+    viewer = "viewer"
+
+
+class UserStatus(str, Enum):
+    pending_verification = "pending_verification"
+    active = "active"
+    inactive = "inactive"
+    suspended = "suspended"
