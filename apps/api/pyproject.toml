@@ -21,4 +21,4 @@ build-backend = "uv_build"
 package = false
 
 [tool.fastapi]
-entrypoint = "src.main:app"
+entrypoint = "main:app"
