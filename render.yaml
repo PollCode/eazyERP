@@ -1,0 +1,38 @@
+services:
+  - type: web
+    name: eazy-erp-api
+    runtime: docker
+    plan: starter # o 'free' para empezar
+    region: oregon
+    # --- CLAVES PARA EL MONOREPO ---
+    # El contexto de Docker es la raíz del monorepo
+    dockerContext: .
+    # La ruta al Dockerfile dentro de apps/api
+    dockerfilePath: ./apps/api/Dockerfile
+    # -----------------------------
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: erp-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: erp-cache
+          type: redis
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true # Render genera un secreto seguro automáticamente
+      - key: CORS_ORIGINS
+        value: https://tu-app.vercel.app # La URL de tu frontend en Vercel
+
+databases:
+  - name: erp-db
+    plan: free # o 'starter'
+    region: oregon
+
+# Si decides usar el Redis de Render en lugar de Upstash
+# - name: erp-cache
+#   type: redis
+#   plan: free
+#   region: oregon
